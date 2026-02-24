@@ -1,11 +1,687 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=backend/index.html">
-<title>ResumeAI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResumeAI â€” Intelligent Resume Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-<p>Redirecting... <a href="backend/index.html">Click here</a></p>
+
+<!-- Cursors -->
+<div id="cur"></div>
+<div id="cur2"></div>
+<div id="cur3"></div>
+
+<!-- Canvas BG -->
+<canvas id="bgCanvas"></canvas>
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo" role="button" tabindex="0" data-go="home">RESUME<span class="accent">AI</span></div>
+  <ul class="nav-links">
+    <li><a href="#" data-go="home">Home</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#" data-go="analyze">Analyze</a></li>
+    <li><a href="#" data-go="learn">Learn More</a></li>
+  </ul>
+  <button class="btn-ghost theme-toggle" id="themeToggleBtn" type="button">[ CARBON THEME ]</button>
+  <button class="btn-ghost" id="perfToggleBtn" type="button">[ PERFORMANCE AUTO ]</button>
+  <button class="btn-ghost" id="cmdkBtn" type="button">[ QUICK COMMANDS ]</button>
+  <div class="nav-right" id="navRight">
+    <button class="btn-ghost" type="button" data-go="login">Log In</button>
+    <button class="btn-neon" type="button" data-go="signup">Sign Up</button>
+  </div>
+  <div class="user-badge" id="userBadge">
+    <div class="ub-dot"></div>
+    <span id="userNameDisplay">USER</span>
+  </div>
+</nav>
+
+<!-- â•â•â•â• HOME PAGE â•â•â•â• -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-blob"></div>
+    <div class="scanlines"></div>
+    <div class="scan-beam"></div>
+
+    <div>
+      <div class="hero-eyebrow">
+        <div class="eyebrow-dot"></div>
+        <span>AI_SYSTEM_v2.4 // RESUME_INTELLIGENCE</span>
+      </div>
+      <h1>
+        <span class="line1">INTELLIGENT</span>
+        <span class="line2">RESUME ANALYSIS</span>
+      </h1>
+      <p class="hero-sub">Real projects and tools by Shlok: Backend automation, n8n workflows, AI agents, and full-stack web builds.</p>
+      <div class="hero-actions">
+        <button class="btn-hero-main" type="button" data-go="analyze">[ ANALYZE NOW ]</button>
+        <button class="btn-hero-sec" type="button" data-go="learn">LEARN MORE</button>
+      </div>
+
+      <div class="hero-terminal">
+        <div class="terminal-bar">
+          <div class="t-dot t-red"></div>
+          <div class="t-dot t-yellow"></div>
+          <div class="t-dot t-green"></div>
+          <div class="t-title">resume_analyzer.sh</div>
+        </div>
+        <div class="terminal-body">
+          <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">resumeai --scan resume.pdf</span></div>
+          <div class="t-line t-out"><span class="t-success">âœ“</span> Loading AI model... done</div>
+          <div class="t-line t-out"><span class="t-success">âœ“</span> Parsing document structure...</div>
+          <div class="t-line t-out"><span class="t-warn">âš </span> ATS keywords: 68% match found</div>
+          <div class="t-line t-out"><span class="t-warn">âš </span> Impact score: 60/100 â€” needs improvement</div>
+          <div class="t-line">
+            <span class="t-prompt">$</span>
+            <textarea id="tinyCodeInput" class="t-code-input" maxlength="2000" placeholder="write JavaScript here... e.g. console.log('hi')"></textarea>
+            <span class="t-cursor"></span>
+          </div>
+          <div class="t-actions">
+            <button class="t-run" id="tinyRunBtn" type="button">[ RUN ]</button>
+            <button class="t-clear" id="tinyClearBtn" type="button">[ CLEAR ]</button>
+          </div>
+          <div class="t-line t-out t-limit" id="tinyCodeMeta">// 0/2000 chars</div>
+          <div class="t-output" id="tinyCodeOutput">// Output will appear here</div>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-n">Backend</div>
+          <div class="stat-l">APIs & Systems</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-n">n8n + AI</div>
+          <div class="stat-l">Automation Focus</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-n">Full-Stack</div>
+          <div class="stat-l">Web Products</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof-strip reveal">
+    <div class="proof-topline"></div>
+    <div class="proof-wrap" id="proofWrap">
+      <div class="proof-track" id="proofTrack">
+        <article class="proof-card"><img src="proof/proof-ats.svg" alt="ATS match panel"><div class="proof-cap">REAL PROOF // ATS MATCH PANEL</div></article>
+        <article class="proof-card"><img src="proof/proof-score.svg" alt="Score evolution panel"><div class="proof-cap">REAL PROOF // SCORE EVOLUTION</div></article>
+        <article class="proof-card"><img src="proof/proof-keywords.svg" alt="Keyword detection panel"><div class="proof-cap">REAL PROOF // KEYWORD DETECTION</div></article>
+        <article class="proof-card"><img src="proof/proof-dashboard.svg" alt="Analytics dashboard panel"><div class="proof-cap">REAL PROOF // ANALYTICS DASHBOARD</div></article>
+        <article class="proof-card"><img src="proof/proof-report.svg" alt="Final report panel"><div class="proof-cap">REAL PROOF // FINAL REPORT READY</div></article>
+        <article class="proof-card"><img src="proof/proof-ats.svg" alt="ATS match panel duplicate"><div class="proof-cap">REAL PROOF // ATS MATCH PANEL</div></article>
+        <article class="proof-card"><img src="proof/proof-score.svg" alt="Score evolution panel duplicate"><div class="proof-cap">REAL PROOF // SCORE EVOLUTION</div></article>
+        <article class="proof-card"><img src="proof/proof-keywords.svg" alt="Keyword detection panel duplicate"><div class="proof-cap">REAL PROOF // KEYWORD DETECTION</div></article>
+        <article class="proof-card"><img src="proof/proof-dashboard.svg" alt="Analytics dashboard panel duplicate"><div class="proof-cap">REAL PROOF // ANALYTICS DASHBOARD</div></article>
+        <article class="proof-card"><img src="proof/proof-report.svg" alt="Final report panel duplicate"><div class="proof-cap">REAL PROOF // FINAL REPORT READY</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="live-graph-strip reveal">
+    <div class="lg-head">
+      <div class="lg-title">// REAL_TIME_PERFORMANCE_GRAPH</div>
+      <div class="lg-meta">
+        <div class="lg-pill" id="lgAttempts">TRIES: 0</div>
+        <div class="lg-pill" id="lgScore">LATEST SCORE: 0%</div>
+      </div>
+    </div>
+    <canvas id="liveGraph" width="1200" height="180"></canvas>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section-wrap reveal" id="features">
+    <div style="text-align:center">
+      <div class="sec-eyebrow">// SYSTEM_MODULES</div>
+      <h2 class="sec-title">Core Capabilities</h2>
+      <p class="sec-sub" style="max-width:480px;margin:0 auto">Everything you need to pass ATS systems and impress human recruiters.</p>
+    </div>
+
+    <div class="bento">
+      <div class="bento-card wide" onmousemove="tiltCard(this,event)">
+        <div class="b-icon">ðŸŽ¯
+          <svg viewBox="0 0 44 44"><rect x="1" y="1" width="42" height="42" rx="7"/></svg>
+        </div>
+        <div class="b-title">ATS KEYWORD MATRIX</div>
+        <div class="b-desc">Identify every keyword Applicant Tracking Systems scan for. Get a match percentage and missing terms list for your target role.</div>
+        <div class="b-line"></div>
+      </div>
+      <div class="bento-card" onmousemove="tiltCard(this,event)">
+        <div class="b-icon">ðŸ“Š
+          <svg viewBox="0 0 44 44"><rect x="1" y="1" width="42" height="42" rx="7"/></svg>
+        </div>
+        <div class="b-title">STRUCTURE SCAN</div>
+        <div class="b-desc">Deep analysis of layout, section hierarchy, and formatting for maximum recruiter impact.</div>
+        <div class="b-line"></div>
+      </div>
+      <div class="bento-card" onmousemove="tiltCard(this,event)">
+        <div class="b-icon">ðŸ¤–
+          <svg viewBox="0 0 44 44"><rect x="1" y="1" width="42" height="42" rx="7"/></svg>
+        </div>
+        <div class="b-title">AI INTELLIGENCE</div>
+        <div class="b-desc">Feedback trained on thousands of successful resumes from top companies worldwide.</div>
+        <div class="b-line"></div>
+      </div>
+      <div class="bento-card" onmousemove="tiltCard(this,event)">
+        <div class="b-icon">âš¡
+          <svg viewBox="0 0 44 44"><rect x="1" y="1" width="42" height="42" rx="7"/></svg>
+        </div>
+        <div class="b-title">30-SEC RESULTS</div>
+        <div class="b-desc">Complete analysis in under 30 seconds. No waiting.</div>
+        <div class="b-line"></div>
+      </div>
+      <div class="bento-card" onmousemove="tiltCard(this,event)">
+        <div class="b-icon">ðŸ”’
+          <svg viewBox="0 0 44 44"><rect x="1" y="1" width="42" height="42" rx="7"/></svg>
+        </div>
+        <div class="b-title">ZERO DATA STORE</div>
+        <div class="b-desc">Analyzed and discarded. Your resume is never stored.</div>
+        <div class="b-line"></div>
+      </div>
+      <div class="bento-card wide" onmousemove="tiltCard(this,event)">
+        <div class="b-icon">ðŸ“ˆ
+          <svg viewBox="0 0 44 44"><rect x="1" y="1" width="42" height="42" rx="7"/></svg>
+        </div>
+        <div class="b-title">SCORE EVOLUTION</div>
+        <div class="b-desc">Track your resume score over iterations. Watch your match percentage climb as you apply our suggestions and optimize for your target industry.</div>
+        <div class="b-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section-wrap reveal" id="how" style="background:rgba(255,255,255,.03)">
+    <div style="text-align:center">
+      <div class="sec-eyebrow">// EXECUTION_FLOW</div>
+      <h2 class="sec-title">Three-Step Protocol</h2>
+    </div>
+    <div class="steps-row">
+      <div class="step-item">
+        <div class="step-hex">
+          <svg viewBox="0 0 100 100">
+            <polygon class="hex-bg" points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5" stroke-width="1"/>
+            <polygon class="hex-line" points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5"/>
+          </svg>
+          <div class="step-inner">01</div>
+        </div>
+        <div class="step-title">INPUT RESUME</div>
+        <div class="step-desc">Paste text or upload your PDF resume into our secure input zone.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-hex">
+          <svg viewBox="0 0 100 100">
+            <polygon class="hex-bg" points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5" stroke-width="1"/>
+            <polygon class="hex-line" points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5"/>
+          </svg>
+          <div class="step-inner">02</div>
+        </div>
+        <div class="step-title">AI PROCESSES</div>
+        <div class="step-desc">AI scans keywords, structure, impact, and ATS compatibility in real time.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-hex">
+          <svg viewBox="0 0 100 100">
+            <polygon class="hex-bg" points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5" stroke-width="1"/>
+            <polygon class="hex-line" points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5"/>
+          </svg>
+          <div class="step-inner">03</div>
+        </div>
+        <div class="step-title">GET INSIGHTS</div>
+        <div class="step-desc">Receive a detailed score, progress breakdown, and actionable fix list.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-wrap reveal">
+    <div class="cta-inner">
+      <div class="sec-eyebrow" style="text-align:center">// INITIATE_SEQUENCE</div>
+      <h2>Want to Work With Shlok?</h2>
+      <p>Check projects, skills, and direct contact on the profile page.</p>
+      <button class="btn-hero-main" type="button" data-go="learn">[ OPEN PROFILE ]</button>
+    </div>
+  </section>
+
+  <section class="section-wrap reveal cube-lab" id="cube-lab">
+    <div style="text-align:center">
+      <div class="sec-eyebrow">// INTERACTIVE_CUBE_LAB</div>
+      <h2 class="sec-title">Drag-Controlled System Cube</h2>
+      <p class="sec-sub" style="max-width:620px;margin:0 auto">Cube ko mouse se drag karke rotate karo. Right panel me usi interaction ka visible code diya hai.</p>
+    </div>
+    <div class="cube-lab-grid">
+      <div class="cube-stage" id="cubeStage">
+        <div class="moving-system" aria-hidden="true">
+          <div class="ms-grid"></div>
+          <div class="ms-orbit" id="msOrbitRing"></div>
+          <div class="ms-axis" id="msAxis">
+            <span class="ms-x"></span>
+            <span class="ms-y"></span>
+            <span class="ms-z"></span>
+          </div>
+          <div class="ms-core" id="cubeCore">
+            <div class="ms-face ms-f1"></div>
+            <div class="ms-face ms-f2"></div>
+            <div class="ms-face ms-f3"></div>
+            <div class="ms-face ms-f4"></div>
+            <div class="ms-face ms-f5"></div>
+            <div class="ms-face ms-f6"></div>
+          </div>
+          <div class="ms-cuboid" id="msCuboid"></div>
+          <div class="ms-triangle" id="msTriangle"></div>
+          <div class="ms-prism" id="msPrism"></div>
+          <div class="ms-mini" id="msMini"></div>
+        </div>
+        <div class="cube-hint">// Drag horizontally/vertically to rotate</div>
+      </div>
+      <div class="cube-code">
+        <div class="code-topbar">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <div class="code-file">cube-controls.js</div>
+          <div class="code-lang">JavaScript</div>
+        </div>
+        <ol class="code-lines">
+          <li><span class="tok-comment">// core rotation logic</span></li>
+          <li><span class="tok-key">let</span> <span class="tok-var">cubeRotX</span> <span class="tok-op">=</span> <span class="tok-num">-22</span>, <span class="tok-var">cubeRotY</span> <span class="tok-op">=</span> <span class="tok-num">28</span>;</li>
+          <li><span class="tok-key">function</span> <span class="tok-fn">setCubeRotation</span>(){</li>
+          <li>&nbsp;&nbsp;<span class="tok-var">cubeCore</span>.<span class="tok-var">style</span>.<span class="tok-var">transform</span> <span class="tok-op">=</span></li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tok-str">`translate(-50%,-50%) rotateX(${cubeRotX}deg) rotateY(${cubeRotY}deg)`</span>;</li>
+          <li>}</li>
+          <li>&nbsp;</li>
+          <li><span class="tok-comment">// pointer control</span></li>
+          <li><span class="tok-var">cubeStage</span>.<span class="tok-fn">addEventListener</span>(<span class="tok-str">'pointerdown'</span>, <span class="tok-var">startDrag</span>);</li>
+          <li><span class="tok-var">window</span>.<span class="tok-fn">addEventListener</span>(<span class="tok-str">'pointermove'</span>, <span class="tok-var">onDrag</span>);</li>
+          <li><span class="tok-var">window</span>.<span class="tok-fn">addEventListener</span>(<span class="tok-str">'pointerup'</span>, <span class="tok-var">endDrag</span>);</li>
+          <li>&nbsp;</li>
+          <li><span class="tok-comment">// extra visuals around cube</span></li>
+          <li><span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-str">&quot;ms-cuboid&quot;</span><span class="tok-tag">&gt;&lt;/div&gt;</span></li>
+          <li><span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-str">&quot;ms-triangle&quot;</span><span class="tok-tag">&gt;&lt;/div&gt;</span></li>
+          <li><span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-str">&quot;ms-prism&quot;</span><span class="tok-tag">&gt;&lt;/div&gt;</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-wrap reveal">
+    <div class="learn-teaser">
+      <div class="sec-eyebrow">// PERSONAL_PROFILE_PAGE</div>
+      <h2 class="sec-title">Know Me Beyond ResumeAI</h2>
+      <p>Dedicated aesthetic page pe mere baare me full details, projects, social handles aur direct contact dekh sakte ho.</p>
+      <button class="btn-hero-main" type="button" data-go="learn">[ OPEN LEARN MORE ]</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-row">
+      <div class="f-logo">RESUME<span class="ac">AI</span></div>
+      <div class="f-copy">Â© 2026 SHLOK // BUILDER PROFILE</div>
+      <div class="f-links">
+        <a href="https://github.com/shloktripathi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://t.me/shloktripathi12" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="https://www.instagram.com/dark.lord6006?igsh=MWthaGwzNTE4YjFiYw==" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="mailto:shloktripathi901@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- â•â•â•â• LEARN PAGE â•â•â•â• -->
+<div class="page" id="page-learn">
+  <section class="learn-page">
+    <div class="learn-shell">
+      <div class="learn-head reveal">
+        <div class="learn-kicker">ABOUT CREATOR</div>
+        <h1>Shlok Tripathi</h1>
+        <p>Software Engineer focused on backend systems, workflow automation, AI agents, and full-stack product delivery.</p>
+        <div class="learn-head-row">
+          <div class="learn-availability"><span class="learn-availability-dot"></span>Open for freelance and full-time roles</div>
+          <div class="learn-head-links">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shloktripathi901@gmail.com&su=Hiring%20Inquiry%20for%20Shlok%20Tripathi&body=Hi%20Shlok%2C%0A%0AI%20want%20to%20discuss%20a%20project%20with%20you.%0A%0AProject%20Type%3A%0ABudget%3A%0ATimeline%3A%0A%0ARegards%2C" target="_blank" rel="noopener noreferrer">Hire Me</a>
+            <a href="#" data-go="analyze">See Product Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="learn-metrics reveal">
+        <div class="lm-item"><span>5+</span><small>Production Builds</small></div>
+        <div class="lm-item"><span>20+</span><small>Automation Flows</small></div>
+        <div class="lm-item"><span>Backend First</span><small>System Design Approach</small></div>
+      </div>
+
+      <div class="learn-grid">
+        <article class="learn-card learn-profile reveal-left">
+          <div class="learn-profile-top">
+            <div class="learn-photo" aria-label="Shlok profile photo">
+              <img src="assets/img/pic.jpeg" alt="Shlok Tripathi profile photo" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback')">
+              <span class="learn-photo-fallback" aria-hidden="true">ST</span>
+            </div>
+            <div>
+              <div class="learn-role">Backend & Automation Engineer</div>
+              <div class="learn-location">India • Open to remote collaboration</div>
+            </div>
+          </div>
+          <div class="learn-summary">
+            Building reliable backend APIs, practical automation flows, and AI-enabled products that solve real business problems.
+          </div>
+          <div class="learn-focus-grid">
+            <div class="learn-focus-item">
+              <strong>Automation Ops</strong>
+              <span>n8n pipelines, webhook chains, and business workflow orchestration.</span>
+            </div>
+            <div class="learn-focus-item">
+              <strong>AI Integrations</strong>
+              <span>Agent-powered features, prompt pipelines, and product-level AI actions.</span>
+            </div>
+            <div class="learn-focus-item">
+              <strong>Backend Systems</strong>
+              <span>Reliable APIs, structured data flows, and production-ready architecture.</span>
+            </div>
+          </div>
+          <div class="learn-cta-row">
+            <a class="learn-cta" href="https://mail.google.com/mail/?view=cm&fs=1&to=shloktripathi901@gmail.com&su=Let%27s%20Work%20Together%20-%20Project%20Inquiry&body=Hi%20Shlok%2C%0A%0AI%20am%20interested%20in%20working%20with%20you.%0A%0AProject%20Details%3A%0ACompany%2FProfile%3A%0ABudget%3A%0AStart%20Date%3A%0A%0AThanks%2C" target="_blank" rel="noopener noreferrer">Let's Work Together</a>
+          </div>
+          <div class="learn-tags">
+            <span>Node.js</span>
+            <span>n8n</span>
+            <span>Automation</span>
+            <span>AI Agents</span>
+            <span>Full-Stack</span>
+          </div>
+        </article>
+
+        <article class="learn-card reveal-left">
+          <div class="learn-meta">PROFILE</div>
+          <h3>About Me</h3>
+          <div class="learn-list">
+            <div class="learn-item">Software Engineer | Backend & Automation</div>
+            <div class="learn-item">n8n workflows, AI agents and bots, backend APIs and scalable systems.</div>
+            <div class="learn-item">Also building full-stack web apps with practical, production-ready architecture.</div>
+          </div>
+        </article>
+
+        <article class="learn-card reveal">
+          <div class="learn-meta">CONTACT</div>
+          <h3>Social & Links</h3>
+          <div class="connect-grid">
+            <a href="https://www.instagram.com/dark.lord6006?igsh=MWthaGwzNTE4YjFiYw==" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://t.me/shloktripathi12" target="_blank" rel="noopener noreferrer">Telegram</a>
+            <a href="https://github.com/shloktripathi" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="mailto:shloktripathi901@gmail.com">shloktripathi901@gmail.com</a>
+          </div>
+          <div class="learn-note">Open for collaboration on automation systems, AI agents and backend-first products.</div>
+        </article>
+
+        <article class="learn-card reveal">
+          <div class="learn-meta">PROJECTS</div>
+          <h3>Featured Projects</h3>
+          <div class="learn-list">
+            <div class="learn-item">Project 1: n8n Automation workflows for real business operations.</div>
+            <div class="learn-item">Project 2: AI Agent systems with task execution and integrations.</div>
+            <div class="learn-item">Project 3: Full-stack web apps with backend-first architecture.</div>
+          </div>
+        </article>
+
+        <article class="learn-card reveal-left">
+          <div class="learn-meta">STACK</div>
+          <h3>Skills & Tech</h3>
+          <div class="learn-list">
+            <div class="learn-item">Backend: Node.js, APIs, system integrations, automation pipelines.</div>
+            <div class="learn-item">Automation: n8n workflow design, webhook orchestration, business process automation.</div>
+            <div class="learn-item">AI: AI agents, bot workflows, prompt-driven product features.</div>
+          </div>
+          <div style="margin-top:16px">
+            <button class="btn-hero-sec" type="button" data-go="home">BACK TO HOME</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- â•â•â•â• ANALYZE PAGE â•â•â•â• -->
+<div class="page" id="page-analyze">
+  <div class="analyze-wrap">
+    <div class="analyze-hdr">
+      <div class="sec-eyebrow" style="text-align:center">// SCAN_INTERFACE</div>
+      <h1>ANALYZE <span style="color:var(--neon)">RESUME</span></h1>
+      <p>Paste your resume content below for instant AI analysis</p>
+    </div>
+
+    <div id="az-input">
+      <div class="input-zone">
+        <label class="iz-label" for="rText">// RESUME_INPUT</label>
+        <textarea id="rText" placeholder="Paste your complete resume here...&#10;&#10;Include experience, education, skills, and achievements for maximum accuracy."></textarea>
+        <div class="upload-row">
+          <button class="upload-btn" id="uploadOpenBtn" type="button">[ UPLOAD PDF / IMAGES ]</button>
+          <input id="resumeUpload" type="file" accept=".pdf,.txt,image/*" multiple style="display:none">
+          <span class="upload-meta" id="uploadMeta">// NO FILES SELECTED</span>
+        </div>
+        <div class="jd-zone">
+          <label class="iz-label" for="jdText">// TARGET_JOB_DESCRIPTION (OPTIONAL)</label>
+          <textarea id="jdText" placeholder="Paste target job description to get role-specific keyword matching."></textarea>
+          <div class="jd-footer"><span id="jdCharCnt">0 jd chars</span></div>
+        </div>
+        <div class="iz-footer">
+          <span id="charCnt">0 chars</span>
+          <span id="liveHint">// LIVE AI: WAITING FOR INPUT</span>
+        </div>
+      </div>
+      <button class="analyze-btn" id="runAnalysisBtn" type="button">
+        <span>[ EXECUTE ANALYSIS ]</span>
+      </button>
+    </div>
+
+    <div class="loading-zone" id="az-load">
+      <div class="hex-loader">
+        <svg viewBox="0 0 80 80">
+          <circle class="hl-track" cx="40" cy="40" r="30"/>
+          <circle class="hl-fill" cx="40" cy="40" r="30"/>
+        </svg>
+      </div>
+      <div class="load-msg">ANALYZING<span class="load-dots"></span></div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--mid);opacity:.4;margin-top:8px;letter-spacing:1px;" id="loadStep">SCANNING STRUCTURE</div>
+    </div>
+
+    <div class="results-zone" id="az-results">
+      <svg width="0" height="0"><defs>
+        <linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#11131a"/>
+          <stop offset="100%" style="stop-color:#00d4ff"/>
+        </linearGradient>
+      </defs></svg>
+
+      <div class="r-score-card">
+        <div class="score-row">
+          <div class="big-ring">
+            <svg viewBox="0 0 120 120">
+              <circle class="br-bg" cx="60" cy="60" r="50"/>
+              <circle class="br-fill" cx="60" cy="60" r="50"/>
+            </svg>
+            <div class="ring-inner">
+              <div class="ring-num" id="overallScoreNum">75</div>
+              <div class="ring-lbl">/ 100</div>
+            </div>
+          </div>
+          <div class="score-info">
+            <h3 id="overallGrade">GOOD RESUME</h3>
+            <p id="overallSummary">Solid foundation detected. Targeted improvements will significantly boost ATS performance and recruiter visibility.</p>
+            <div class="score-tag" id="overallStatus">STATUS: IMPROVABLE</div>
+          </div>
+        </div>
+
+        <div class="prog-grid">
+          <div class="prog-it">
+            <div class="prog-hdr"><span>ATS_COMPAT</span><span id="atsScoreText">68%</span></div>
+            <div class="prog-track"><div class="prog-bar" id="atsBar" style="width:68%"></div></div>
+          </div>
+          <div class="prog-it">
+            <div class="prog-hdr"><span>CONTENT_QUALITY</span><span id="contentScoreText">82%</span></div>
+            <div class="prog-track"><div class="prog-bar" id="contentBar" style="width:82%;animation-delay:.2s"></div></div>
+          </div>
+          <div class="prog-it">
+            <div class="prog-hdr"><span>STRUCTURE</span><span id="structureScoreText">75%</span></div>
+            <div class="prog-track"><div class="prog-bar" id="structureBar" style="width:75%;animation-delay:.4s"></div></div>
+          </div>
+          <div class="prog-it">
+            <div class="prog-hdr"><span>IMPACT_SCORE</span><span id="impactScoreText">60%</span></div>
+            <div class="prog-track"><div class="prog-bar" id="impactBar" style="width:60%;animation-delay:.6s"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="r-score-card">
+        <div class="sec-eyebrow">// RECOMMENDATIONS</div>
+        <div class="sug-list" id="recommendationList">
+          <div class="sug-item s-ok"><div class="s-ico">âœ“</div>Strong action verbs detected throughout experience section â€” maintain this pattern.</div>
+          <div class="sug-item s-warn"><div class="s-ico">âš </div>Quantify achievements: replace vague claims with numbers â€” "improved efficiency by 40%."</div>
+          <div class="sug-item s-warn"><div class="s-ico">âš </div>Add a professional summary (3-4 lines) â€” recruiters spend 6 seconds on first scan.</div>
+          <div class="sug-item s-err"><div class="s-ico">âœ•</div>Critical ATS keywords missing: "agile," "cross-functional," "stakeholder management."</div>
+          <div class="sug-item s-err"><div class="s-ico">âœ•</div>Skills section too generic â€” list specific tools, frameworks, and proficiency levels.</div>
+        </div>
+      </div>
+
+      <button class="analyze-btn" style="margin-top:8px" id="resetAzBtn" type="button">
+        <span>[ RESET // ANALYZE ANOTHER ]</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- â•â•â•â• LOGIN PAGE â•â•â•â• -->
+<div class="page" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-bg-lines">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="auth-card">
+      <div class="auth-top-line"></div>
+      <div class="auth-logo-wrap">
+        <div class="auth-logo">RESUME<span class="ac">AI</span></div>
+      </div>
+      <div class="auth-tagline">// SECURE_ACCESS_PORTAL</div>
+      <div class="auth-title">SIGN IN</div>
+      <div class="auth-sub">Access your resume analysis dashboard</div>
+
+      <div class="fld">
+        <label class="fld-label">// EMAIL_ADDRESS</label>
+        <input type="email" class="fld-input" id="loginEmail" placeholder="operator@domain.com">
+        <div class="fld-line"></div>
+      </div>
+      <div class="fld">
+        <label class="fld-label">// PASSWORD</label>
+        <input type="password" class="fld-input" id="loginPass" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢">
+        <div class="fld-line"></div>
+      </div>
+
+      <button class="auth-submit" id="loginSubmitBtn" type="button"><span>[ AUTHENTICATE ]</span></button>
+      <div id="loginErr" style="color:#ff5f56;font-family:'JetBrains Mono',monospace;font-size:.65rem;text-align:center;margin-top:10px;display:none;">// ERROR: Invalid credentials</div>
+
+      <div class="auth-sep"><span>OR</span></div>
+      <div class="auth-switch">
+        No account? <a href="#" data-go="signup">Register here</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- â•â•â•â• SIGNUP PAGE â•â•â•â• -->
+<div class="page" id="page-signup">
+  <div class="auth-wrap">
+    <div class="auth-bg-lines">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="auth-card">
+      <div class="auth-top-line"></div>
+      <div class="auth-logo-wrap">
+        <div class="auth-logo">RESUME<span class="ac">AI</span></div>
+      </div>
+      <div class="auth-tagline">// CREATE_NEW_OPERATOR</div>
+      <div class="auth-title">REGISTER</div>
+      <div class="auth-sub">Create your free account â€” no card required</div>
+
+      <div class="fld">
+        <label class="fld-label">// FULL_NAME</label>
+        <input type="text" class="fld-input" id="regName" placeholder="Enter your name">
+        <div class="fld-line"></div>
+      </div>
+      <div class="fld">
+        <label class="fld-label">// EMAIL_ADDRESS</label>
+        <input type="email" class="fld-input" id="regEmail" placeholder="operator@domain.com">
+        <div class="fld-line"></div>
+      </div>
+      <div class="fld">
+        <label class="fld-label">// PASSWORD</label>
+        <input type="password" class="fld-input" id="regPass" placeholder="Min. 6 characters">
+        <div class="fld-line"></div>
+      </div>
+
+      <button class="auth-submit" id="signupSubmitBtn" type="button"><span>[ CREATE ACCOUNT ]</span></button>
+      <div id="signupErr" style="color:#ff5f56;font-family:'JetBrains Mono',monospace;font-size:.65rem;text-align:center;margin-top:10px;display:none;"></div>
+      <div id="signupOk" style="color:#27c93f;font-family:'JetBrains Mono',monospace;font-size:.65rem;text-align:center;margin-top:10px;display:none;">// ACCOUNT CREATED â€” Redirecting...</div>
+
+      <div class="auth-sep"><span>OR</span></div>
+      <div class="auth-switch">
+        Already registered? <a href="#" data-go="login">Sign in</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cmdk" id="cmdk" hidden aria-hidden="true">
+  <div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="Quick commands">
+    <div class="cmdk-head">
+      <input id="cmdkInput" type="text" autocomplete="off" placeholder="Type a command... (home, analyze, theme, performance)">
+    </div>
+    <div class="cmdk-list" id="cmdkList">
+      <button class="cmdk-item" type="button" data-cmd="home"><span>Go to Home</span><kbd>H</kbd></button>
+      <button class="cmdk-item" type="button" data-cmd="analyze"><span>Open Analyze</span><kbd>A</kbd></button>
+      <button class="cmdk-item" type="button" data-cmd="learn"><span>Open Learn</span><kbd>L</kbd></button>
+      <button class="cmdk-item" type="button" data-cmd="theme"><span>Switch Theme</span><kbd>T</kbd></button>
+      <button class="cmdk-item" type="button" data-cmd="perf"><span>Toggle Performance</span><kbd>P</kbd></button>
+    </div>
+  </div>
+</div>
+<div class="secret-burst" id="secretBurst" aria-hidden="true"></div>
+<div class="secret-toast" id="secretToast">[ SECRET MODE UNLOCKED ]</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
