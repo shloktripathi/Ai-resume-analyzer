@@ -1,0 +1,10 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 190">
+<rect width="320" height="190" fill="#0a0f17"/>
+<rect x="78" y="20" width="164" height="150" rx="10" fill="#111a2a" stroke="#2ef0d277"/>
+<rect x="96" y="42" width="128" height="10" rx="5" fill="#2ef0d2aa"/>
+<rect x="96" y="66" width="108" height="8" rx="4" fill="#9aa8bb77"/>
+<rect x="96" y="82" width="116" height="8" rx="4" fill="#9aa8bb66"/>
+<rect x="96" y="98" width="94" height="8" rx="4" fill="#9aa8bb55"/>
+<circle cx="232" cy="132" r="14" fill="#27c93f"/>
+<text x="36" y="160" fill="#d6dde8" font-size="14" font-family="monospace">FINAL REPORT READY</text>
+</svg>
