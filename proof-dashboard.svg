@@ -1,9 +1,0 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 190">
-<rect width="320" height="190" fill="#0b0f16"/>
-<rect x="18" y="18" width="284" height="154" rx="12" fill="#101726" stroke="#a78bfa66"/>
-<rect x="34" y="36" width="72" height="42" rx="8" fill="#2ef0d233"/>
-<rect x="116" y="36" width="72" height="42" rx="8" fill="#4f7bff33"/>
-<rect x="198" y="36" width="88" height="42" rx="8" fill="#ff8a3d33"/>
-<path d="M38 130 L86 108 L132 118 L180 92 L226 98 L276 74" fill="none" stroke="#2ef0d2" stroke-width="3"/>
-<text x="34" y="155" fill="#d6dde8" font-size="14" font-family="monospace">ANALYTICS DASHBOARD</text>
-</svg>
